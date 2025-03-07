@@ -38,6 +38,21 @@ const rules: KarabinerRules[] = [
         ],
         type: "basic",
       },
+      {
+        description: "Fn -> Control",
+        from: {
+          key_code: "fn",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "left_control",
+          },
+        ],
+        type: "basic",
+      },
       //      {
       //        type: "basic",
       //        description: "Disable CMD + Tab to force Hyper Key usage",
@@ -55,49 +70,228 @@ const rules: KarabinerRules[] = [
       //      },
     ],
   },
+  {
+    "description": "Left cmd + hjkl to arrow keys Vim",
+    "manipulators": [
+      {
+        "from": {
+          "key_code": "h",
+          "modifiers": {
+            "mandatory": [
+              "right_command"
+            ],
+            "optional": [
+              "any"
+            ]
+          }
+        },
+        "to": [
+          {
+            "key_code": "left_arrow"
+          }
+        ],
+        "type": "basic"
+      },
+      {
+        "from": {
+          "key_code": "j",
+          "modifiers": {
+            "mandatory": [
+              "right_command"
+            ],
+            "optional": [
+              "any"
+            ]
+          }
+        },
+        "to": [
+          {
+            "key_code": "down_arrow"
+          }
+        ],
+        "type": "basic"
+      },
+      {
+        "from": {
+          "key_code": "k",
+          "modifiers": {
+            "mandatory": [
+              "right_command"
+            ],
+            "optional": [
+              "any"
+            ]
+          }
+        },
+        "to": [
+          {
+            "key_code": "up_arrow"
+          }
+        ],
+        "type": "basic"
+      },
+      {
+        "from": {
+          "key_code": "l",
+          "modifiers": {
+            "mandatory": [
+              "right_command"
+            ],
+            "optional": [
+              "any"
+            ]
+          }
+        },
+        "to": [
+          {
+            "key_code": "right_arrow"
+          }
+        ],
+        "type": "basic"
+      }
+    ]
+  },
+  {
+    "description": "Left CMD toggle lang",
+    "manipulators": [
+      {
+        "conditions": [
+          {
+            "input_sources": [
+              {
+                "language": "en"
+              }
+            ],
+            "type": "input_source_if"
+          }
+        ],
+        "from": {
+          "key_code": "left_command"
+        },
+        "to": [
+          {
+            "key_code": "left_command"
+          }
+        ],
+        "to_if_alone": [
+          {
+            "select_input_source": {
+              "language": "ru"
+            }
+          }
+        ],
+        "type": "basic"
+      },
+      {
+        "conditions": [
+          {
+            "input_sources": [
+              {
+                "language": "ru"
+              }
+            ],
+            "type": "input_source_if"
+          }
+        ],
+        "from": {
+          "key_code": "left_command"
+        },
+        "to": [
+          {
+            "key_code": "left_command"
+          }
+        ],
+        "to_if_alone": [
+          {
+            "select_input_source": {
+              "language": "en"
+            }
+          }
+        ],
+        "type": "basic"
+      }
+    ]
+  },
+
   ...createHyperSubLayers({
     spacebar: open(
       "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
     ),
+    1: {
+      description: "Hyper + 1: Desktop 1",
+      to: [
+        {
+          key_code: "1",
+          modifiers: ["control"],
+        },
+      ],
+    },
+    2: {
+      description: "Hyper + 2: Desktop 2",
+      to: [
+        {
+          key_code: "2",
+          modifiers: ["control"],
+        },
+      ],
+    },
+    3: {
+      description: "Hyper + 3: Desktop 3",
+      to: [
+        {
+          key_code: "3",
+          modifiers: ["control"],
+        },
+      ],
+    },
+    4: {
+      description: "Hyper + 4: Desktop 4",
+      to: [
+        {
+          key_code: "4",
+          modifiers: ["control"],
+        },
+      ],
+    },
+    5: {
+      description: "Hyper + 5: Desktop 5",
+      to: [
+        {
+          key_code: "5",
+          modifiers: ["control"],
+        },
+      ],
+    },
+    6: {
+      description: "Hyper + 6: Desktop 6",
+      to: [
+        {
+          key_code: "6",
+          modifiers: ["control"],
+        },
+      ],
+    },
     // b = "B"rowse
     b: {
-      t: open("https://twitter.com"),
-      // Quarterly "P"lan
-      p: open("https://mxstbr.com/cal"),
-      y: open("https://news.ycombinator.com"),
-      f: open("https://facebook.com"),
-      r: open("https://reddit.com"),
-      h: open("https://hashnode.com/draft"),
+      s: open("https://code.moba.live"),
     },
-    // o = "Open" applications
-    o: {
+    // a = Applications
+    a: {
       1: app("1Password"),
-      g: app("Google Chrome"),
-      c: app("Notion Calendar"),
-      v: app("Zed"),
       d: app("Discord"),
       s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Terminal"),
+      t: app("Telegram"),
+      m: app("Mail"),
+      b: app("Arc"),
+      c: app("Visual Studio Code"),
       // Open todo list managed via *H*ypersonic
-      h: open(
-        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
-      ),
-      z: app("zoom.us"),
       // "M"arkdown (Reflect.app)
-      m: app("Reflect"),
       r: app("Reflect"),
       f: app("Finder"),
+      o: app("Obsidian"),
       // "i"Message
-      i: app("Texts"),
       p: app("Spotify"),
       a: app("iA Presenter"),
-      // "W"hatsApp has been replaced by Texts
-      w: open("Texts"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
-      ),
     },
 
     // TODO: This doesn't quite work yet.
@@ -128,10 +322,10 @@ const rules: KarabinerRules[] = [
       },
       y: rectangle("previous-display"),
       o: rectangle("next-display"),
-      k: rectangle("top-half"),
-      j: rectangle("bottom-half"),
-      h: rectangle("left-half"),
-      l: rectangle("right-half"),
+      k: rectangle("top-right"),
+      j: rectangle("bottom-left"),
+      h: rectangle("top-left"),
+      l: rectangle("bottom-right"),
       f: rectangle("maximize"),
       u: {
         description: "Window: Previous Tab",
@@ -326,30 +520,6 @@ const rules: KarabinerRules[] = [
       ),
     },
   }),
-  {
-    description: "Change Backspace to Spacebar when Minecraft is focused",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "delete_or_backspace",
-        },
-        to: [
-          {
-            key_code: "spacebar",
-          },
-        ],
-        conditions: [
-          {
-            type: "frontmost_application_if",
-            file_paths: [
-              "^/Users/mxstbr/Library/Application Support/minecraft/runtime/java-runtime-gamma/mac-os-arm64/java-runtime-gamma/jre.bundle/Contents/Home/bin/java$",
-            ],
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 fs.writeFileSync(
